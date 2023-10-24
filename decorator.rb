@@ -1,5 +1,6 @@
 class Decorator < Nameable
   def initialize(nemeable)
+    super()
     @nemeable = nemeable
   end
 
