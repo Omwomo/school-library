@@ -90,29 +90,3 @@ def list_rentals_for_person(people)
     puts "Date: #{rental.date}, Book: #{rental.book.title}"
   end
 end
-
-def handle_list_books(books)
-  list_all_books(books)
-end
-
-def handle_list_people(people)
-  list_all_people(people)
-end
-
-def handle_create_person(people)
-  create_person(people)
-end
-
-def handle_create_book(books)
-  create_book(books)
-end
-
-def handle_create_rental(books, people)
-  create_rental(books, people)
-end
-
-def handle_list_rentals(people)
-  print 'Enter person id: '
-  person_id = gets.chomp.to_i
-  list_rentals_for_person(person_id, people)
-end
