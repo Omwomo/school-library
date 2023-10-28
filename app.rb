@@ -34,3 +34,8 @@ end
 def create_book(title, author)
   Book.new(title, author)
 end
+
+# Create a rental
+def create_rental(date, book, person)
+  Rental.new(date, book, person)
+end
