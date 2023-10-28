@@ -39,7 +39,6 @@ def create_person(people)
     return nil
   end
 
-  people << person
   person
 end
 
@@ -75,10 +74,7 @@ def create_rental(books, people)
 end
 
 # List all rentals for a given person id
-def list_rentals_for_person(people)
-  print 'Enter person id: '
-  person_id = gets.chomp.to_i
-
+def list_rentals_for_person(person_id, people)
   person = Person.find_by_id(person_id, people)
 
   if person.nil?
@@ -89,30 +85,4 @@ def list_rentals_for_person(people)
   person.rentals.each do |rental|
     puts "Date: #{rental.date}, Book: #{rental.book.title}"
   end
-end
-
-def handle_list_books(books)
-  list_all_books(books)
-end
-
-def handle_list_people(people)
-  list_all_people(people)
-end
-
-def handle_create_person(people)
-  create_person(people)
-end
-
-def handle_create_book(books)
-  create_book(books)
-end
-
-def handle_create_rental(books, people)
-  create_rental(books, people)
-end
-
-def handle_list_rentals(people)
-  print 'Enter person id: '
-  person_id = gets.chomp.to_i
-  list_rentals_for_person(person_id, people)
 end
