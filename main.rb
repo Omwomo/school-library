@@ -14,17 +14,17 @@ end
 def handle_choice(choice, books, people)
   case choice
   when 1
-    list_all_books(books)
+    handle_list_books(books)
   when 2
-    list_all_people(people)
+    handle_list_people(people)
   when 3
-    create_person(people)
+    handle_create_person(people)
   when 4
-    create_book(books)
+    handle_create_book(books)
   when 5
-    create_rental(books, people)
+    handle_create_rental(books, people)
   when 6
-    list_rentals_for_person(people)
+    handle_list_rentals(people)
   when 7
     exit
   else
