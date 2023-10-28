@@ -16,3 +16,16 @@ def list_all_people(people)
     puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
   end
 end
+
+# Create a person (teacher or student)
+def create_person(name, age, type, parent_permission: true, specialization: nil)
+  if type == "teacher"
+    person = Teacher.new(age, specialization, name: name, parent_permission: parent_permission)
+  elsif type == "student"
+    person = Student.new(age, name: name, parent_permission: parent_permission)
+  else
+    puts "Invalid person type."
+    return nil
+  end
+  person
+end
