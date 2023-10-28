@@ -2,6 +2,8 @@ require './book.rb'
 require './person.rb'
 require './rental.rb'
 require './classroom.rb'
+require './teacher.rb'
+require './student.rb'
 
 # List all books
 def list_all_books(books)

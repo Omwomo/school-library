@@ -1,3 +1,5 @@
+require './person.rb'
+
 class Student < Person
   attr_accessor :name
   @all_students = []

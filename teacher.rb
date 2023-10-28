@@ -1,3 +1,5 @@
+require './person.rb'
+
 class Teacher < Person
   @@all_teachers = []
   def initialize(age, specialization, name: 'Unknown', parent_permission: true)

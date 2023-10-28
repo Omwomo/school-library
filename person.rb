@@ -1,3 +1,5 @@
+require './nemeable.rb'
+
 class Person < Nameable
   attr_reader :id
   attr_accessor :name, :age, :rentals
@@ -11,6 +13,10 @@ class Person < Nameable
     @parent_permission = parent_permission
     @rentals = []
     @@all_people << self
+  end
+
+  def self.find_by_id(id)
+    @@all_people.find { |person| person.id == id }
   end
 
   def add_rentals(rental)
