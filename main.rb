@@ -12,6 +12,16 @@ class LibraryApp
     puts '7. Quit'
   end
 
+  OPTIONS = {
+    1 => :handle_list_books,
+    2 => :handle_list_people,
+    3 => :handle_create_person,
+    4 => :handle_create_book,
+    5 => :handle_create_rental,
+    6 => :handle_list_rentals,
+    7 => :exit
+  }.freeze
+
   def handle_list_books(books)
     list_all_books(books)
   end
@@ -39,23 +49,14 @@ class LibraryApp
   end
 
   def handle_choice(choice, books, people)
-    case choice
-    when 1
-      handle_list_books(books)
-    when 2
-      handle_list_people(people)
-    when 3
-      handle_create_person(people)
-    when 4
-      handle_create_book(books)
-    when 5
-      handle_create_rental(books, people)
-    when 6
-      handle_list_rentals(people)
-    when 7
+    option = OPTIONS[choice]
+
+    if option.nil?
+      puts 'Invalid choice. Please try again.'
+    elsif option == :exit
       exit
     else
-      puts 'Invalid choice. Please try again.'
+      send(option, books, people)
     end
   end
 
