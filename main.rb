@@ -12,24 +12,21 @@ class LibraryApp
     puts '7. Quit'
   end
 
+  def list_rentals(people)
+    print 'Enter person id: '
+    person_id = gets.chomp.to_i
+    list_rentals_for_person(person_id, people)
+  end
+
   def handle_choice(choice, books, people)
     case choice
-    when 1
-      list_all_books(books)
-    when 2
-      list_all_people(people)
-    when 3
-      create_person(people)
-    when 4
-      create_book(books)
-    when 5
-      create_rental(books, people)
-    when 6
-      print 'Enter person id: '
-      person_id = gets.chomp.to_i
-      list_rentals_for_person(person_id, people)
-    when 7
-      exit
+    when 1 then list_all_books(books)
+    when 2 then list_all_people(people)
+    when 3 then create_person(people)
+    when 4 then create_book(books)
+    when 5 then create_rental(books, people)
+    when 6 then list_rentals(people)
+    when 7 then exit
     else
       puts 'Invalid choice. Please try again.'
     end
