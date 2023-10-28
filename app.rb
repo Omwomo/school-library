@@ -20,7 +20,7 @@ def list_all_people(people)
 end
 
 # Create a person (teacher or student)
-def create_person(people)
+def create_person(*)
   print 'Enter name: '
   name = gets.chomp
   print 'Enter age: '
