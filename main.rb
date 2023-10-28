@@ -12,48 +12,24 @@ class LibraryApp
     puts '7. Quit'
   end
 
-  def handle_list_books(books)
-    list_all_books(books)
-  end
-
-  def handle_list_people(people)
-    list_all_people(people)
-  end
-
-  def handle_create_person(people)
-    person = create_person(people)
-    people << person if person
-  end
-
-  def handle_create_book(books)
-    create_book(books)
-  end
-
-  def handle_create_rental(books, people)
-    create_rental(books, people)
-  end
-
-  def handle_list_rentals(people)
-    print 'Enter person id: '
-    person_id = gets.chomp.to_i
-    list_rentals_for_person(person_id, people)
-  end
-
-  CHOICE_ACTIONS = {
-    1 => :list_all_books,
-    2 => :list_all_people,
-    3 => :create_person,
-    4 => :create_book,
-    5 => :create_rental,
-    6 => :list_rentals_for_person,
-    7 => :exit
-  }.freeze
-
   def handle_choice(choice, books, people)
-    action = CHOICE_ACTIONS[choice]
-
-    if action
-      send(action, books, people)
+    case choice
+    when 1
+      list_all_books(books)
+    when 2
+      list_all_people(people)
+    when 3
+      create_person(people)
+    when 4
+      create_book(books)
+    when 5
+      create_rental(books, people)
+    when 6
+      print 'Enter person id: '
+      person_id = gets.chomp.to_i
+      list_rentals_for_person(person_id, people)
+    when 7
+      exit
     else
       puts 'Invalid choice. Please try again.'
     end
