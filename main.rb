@@ -11,6 +11,27 @@ def display_options
   puts '7. Quit'
 end
 
+def handle_choice(choice, books, people)
+  case choice
+  when 1
+    list_all_books(books)
+  when 2
+    list_all_people(people)
+  when 3
+    create_person(people)
+  when 4
+    create_book(books)
+  when 5
+    create_rental(books, people)
+  when 6
+    list_rentals_for_person(people)
+  when 7
+    exit
+  else
+    puts 'Invalid choice. Please try again.'
+  end
+end
+
 def main
   people = []
   books = []
@@ -20,24 +41,7 @@ def main
 
     choice = gets.chomp.to_i
 
-    case choice
-    when 1
-      list_all_books(books)
-    when 2
-      list_all_people(people)
-    when 3
-      create_person(people)
-    when 4
-      create_book(books)
-    when 5
-      create_rental(books, people)
-    when 6
-      list_rentals_for_person(people)
-    when 7
-      break
-    else
-      puts 'Invalid choice. Please try again.'
-    end
+    handle_choice(choice, books, people)
   end
 end
 
