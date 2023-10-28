@@ -1,10 +1,10 @@
-require './person.rb'
+require './person'
 
 class Teacher < Person
-  @@all_teachers = []
   def initialize(age, specialization, name: 'Unknown', parent_permission: true)
     super(age, name, parent_permission: parent_permission)
     @specialization = specialization
+    @@all_teachers = []
     @@all_teachers << self
   end
 

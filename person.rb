@@ -1,9 +1,8 @@
-require './nemeable.rb'
+require './nemeable'
 
 class Person < Nameable
   attr_reader :id
   attr_accessor :name, :age, :rentals
-  @@all_people = []
 
   def initialize(age, name = 'Unknown', parent_permission: true)
     super()
@@ -12,12 +11,14 @@ class Person < Nameable
     @age = age
     @parent_permission = parent_permission
     @rentals = []
+    @@all_people = []
     @@all_people << self
   end
 
-  def self.find_by_id(id)
-    @@all_people.find { |person| person.id == id }
+  def self.find_by_id(id, people)
+    people.find { |person| person.id == id }
   end
+
 
   def add_rentals(rental)
     @rentals << rental

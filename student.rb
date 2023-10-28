@@ -1,13 +1,18 @@
-require './person.rb'
+require './person'
 
 class Student < Person
   attr_accessor :name
-  @all_students = []
+
+  @@all_students = []
 
   def initialize(age, name: 'Unknown', parent_permission: true, classroom: nil)
     super(age, name, parent_permission: parent_permission)
     @classroom = classroom
     @@all_students << self
+  end
+
+  def self.all_students
+    @@all_students
   end
 
   def classroom=(classroom)
