@@ -29,3 +29,8 @@ def create_person(name, age, type, parent_permission: true, specialization: nil)
   end
   person
 end
+
+# Create a book
+def create_book(title, author)
+  Book.new(title, author)
+end
