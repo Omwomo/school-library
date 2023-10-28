@@ -39,3 +39,16 @@ end
 def create_rental(date, book, person)
   Rental.new(date, book, person)
 end
+
+# List all rentals for a given person id
+def list_rentals_for_person(person_id)
+  person = Person.find_by_id(person_id)
+  if person.nil?
+    puts "Person with ID #{person_id} not found."
+    return
+  end
+
+  person.rentals.each do |rental|
+    puts "Date: #{rental.date}, Book: #{rental.book.title}"
+  end
+end
