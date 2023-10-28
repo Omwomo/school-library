@@ -18,14 +18,38 @@ class LibraryApp
     list_rentals_for_person(person_id, people)
   end
 
+  def handle_list_books(books)
+    list_all_books(books)
+  end
+
+  def handle_list_people(people)
+    list_all_people(people)
+  end
+
+  def handle_create_person(people)
+    create_person(people)
+  end
+
+  def handle_create_book(books)
+    create_book(books)
+  end
+
+  def handle_create_rental(books, people)
+    create_rental(books, people)
+  end
+
+  def handle_list_rentals(people)
+    list_rentals(people)
+  end
+
   def handle_choice(choice, books, people)
     case choice
-    when 1 then list_all_books(books)
-    when 2 then list_all_people(people)
-    when 3 then create_person(people)
-    when 4 then create_book(books)
-    when 5 then create_rental(books, people)
-    when 6 then list_rentals(people)
+    when 1 then handle_list_books(books)
+    when 2 then handle_list_people(people)
+    when 3 then handle_create_person(people)
+    when 4 then handle_create_book(books)
+    when 5 then handle_create_rental(books, people)
+    when 6 then handle_list_rentals(people)
     when 7 then exit
     else
       puts 'Invalid choice. Please try again.'
