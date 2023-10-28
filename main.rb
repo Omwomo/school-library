@@ -12,7 +12,7 @@ class LibraryApp
     puts '7. Quit'
   end
 
-  def handle_list_books(books, people)
+  def handle_list_books(books)
     list_all_books(books)
   end
 
@@ -39,7 +39,7 @@ class LibraryApp
     list_rentals_for_person(person_id, people)
   end
 
-    CHOICE_ACTIONS = {
+  CHOICE_ACTIONS = {
     1 => :list_all_books,
     2 => :list_all_people,
     3 => :create_person,
