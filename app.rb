@@ -9,3 +9,10 @@ def list_all_books(books)
     puts "Title: #{book.title}, Author: #{book.author}"
   end
 end
+
+# List all people
+def list_all_people(people)
+  people.each do |person|
+    puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
+  end
+end
