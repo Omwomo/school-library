@@ -11,14 +11,13 @@ class Person < Nameable
     @age = age
     @parent_permission = parent_permission
     @rentals = []
-    @@all_people = []
-    @@all_people << self
+    @all_people = []
+    @all_people << self
   end
 
   def self.find_by_id(id, people)
     people.find { |person| person.id == id }
   end
-
 
   def add_rentals(rental)
     @rentals << rental

@@ -32,9 +32,7 @@ def main
     when 5
       create_rental(books, people)
     when 6
-      print 'Enter person id: '
-      person_id = gets.chomp.to_i
-      list_rentals_for_person(person_id, people)
+      list_rentals_for_person(people)
     when 7
       break
     else

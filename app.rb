@@ -75,8 +75,12 @@ def create_rental(books, people)
 end
 
 # List all rentals for a given person id
-def list_rentals_for_person(person_id, people)
+def list_rentals_for_person(people)
+  print 'Enter person id: '
+  person_id = gets.chomp.to_i
+
   person = Person.find_by_id(person_id, people)
+
   if person.nil?
     puts "Person with ID #{person_id} not found."
     return
@@ -86,4 +90,3 @@ def list_rentals_for_person(person_id, people)
     puts "Date: #{rental.date}, Book: #{rental.book.title}"
   end
 end
-
