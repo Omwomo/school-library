@@ -12,12 +12,6 @@ class LibraryApp
     puts '7. Quit'
   end
 
-  def list_rentals(people)
-    print 'Enter person id: '
-    person_id = gets.chomp.to_i
-    list_rentals_for_person(person_id, people)
-  end
-
   # rubocop:disable Metrics/CyclomaticComplexity
   def handle_choice(choice, books, people)
     case choice

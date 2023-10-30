@@ -86,3 +86,9 @@ def list_rentals_for_person(person_id, people)
     puts "Date: #{rental.date}, Book: #{rental.book.title}"
   end
 end
+
+def list_rentals(people)
+  print 'Enter person id: '
+  person_id = gets.chomp.to_i
+  list_rentals_for_person(person_id, people)
+end
