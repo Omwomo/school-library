@@ -51,13 +51,13 @@ class Person < Nameable
     {
       'id' => @id,
       'name' => @name,
-      'age' => @age,
+      'age' => @age
     }.to_json(options)
   end
 
   # Deserialize the hash back into an object
   def self.from_json(json_hash)
-    self.new(json_hash['age'], json_hash['name'])
+    new(json_hash['age'], json_hash['name'])
   end
 end
 

@@ -24,7 +24,7 @@ class Book
 
   # Deserialize the hash back into an object
   def self.from_json(json_hash)
-    self.new(json_hash['title'], json_hash['author'])
+    new(json_hash['title'], json_hash['author'])
   end
 end
 
