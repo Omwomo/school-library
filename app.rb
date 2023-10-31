@@ -6,8 +6,8 @@ require './teacher'
 require './student'
 
 # List all books
-def list_all_books(books)
-  books.each do |book|
+def list_all_books
+  load_books.each do |book|
     puts "Title: #{book.title}, Author: #{book.author}"
   end
 end
@@ -56,6 +56,7 @@ def create_book(books)
 
   book = Book.new(title, author)
   books << book
+  save_books(books)
   book
 end
 
