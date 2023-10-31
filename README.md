@@ -74,6 +74,12 @@ Clone this repository to your desired folder:
 - LinkedIn: [LinkedIn](https://linkedin.com/in/Omwomo)
 
 
+👤 **Thierry Noumbuh**
+- GitHub: [@Omwomo](https://github.com/axcell-0)
+
+👤 **Bianca Lopez**
+- GitHub: [@Omwomo](https://github.com/BiancaMe)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
