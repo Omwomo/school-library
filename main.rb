@@ -18,8 +18,9 @@ class LibraryApp
   end
 
   def main
-    people = []
+    people = load_people
     books = load_books
+
     loop do
       display_options
 

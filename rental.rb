@@ -11,34 +11,38 @@ class Rental
     person.rentals << self
   end
 
-  # Serialize the object to a hash
   def to_json
     {
       'date' => @date,
-      'person' => @person,
-      'book' => @book,
+      'person' => @person.name,
+      'book' => @book.title
     }
   end
 
-  # Deserialize the hash back into an object
-  def self.from_json(json_hash)
-    self.new(json_hash['date'], json_hash['person'], json_hash['book'])
+  def self.from_json(json_data)
+    self.new(
+      json_data['date'],
+      Book.new(json_data['book'], ''),
+      Person.new(0, '', parent_permission: true, id: json_data['person'])
+    )
   end
 end
 
 def save_rental(rental)
-  File.open('storage/rental.json', 'w') do |file|
-    file.write(JSON.dump(rental))
+  rentals_data = load_rental
+  rentals_data << rental
+
+  File.open('storage/rentals.json', 'w') do |file|
+    file.write(JSON.dump(rentals_data.map(&:to_json)))
   end
 end
 
 def load_rental
-  loaded_rental_data = JSON.parse(File.read('storage/rental.json'))
-  loaded_rental = []
-
-  loaded_rental_data.each do |rental_data|
-    loaded_rental << rental.from_json(rental_data)
+  begin
+    loaded_rentals_data = JSON.parse(File.read('storage/rentals.json'))
+    loaded_rentals_data.map { |rental_data| Rental.from_json(rental_data) }
+  rescue JSON::ParserError => e
+    puts "Error parsing JSON: #{e.message}"
+    []
   end
-
-  loaded_rental
 end
