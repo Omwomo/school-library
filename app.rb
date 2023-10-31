@@ -77,6 +77,9 @@ def create_rental(books, people)
   else
     puts "Book with title '#{title}' or person with id '#{person_id}' not found."
   end
+
+  new_rental = Rental.new(date, book, person)
+  save_rental(new_rental)
 end
 
 # List all rentals for a given person id
