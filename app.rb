@@ -41,7 +41,6 @@ def create_person(people)
 
   puts "You've succesfully created a #{type} Name: #{person.name} ID: #{person.id} Age: #{person.age}"
 
-  #serialized_person = person.to_json
   people << person
   save_people(people)
   person

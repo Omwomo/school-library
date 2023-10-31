@@ -15,11 +15,11 @@ class Book
   end
 
   # Serialize the object to a hash
-  def to_json
+  def to_json(options = nil)
     {
       'title' => @title,
-      'author' => @author,
-    }
+      'author' => @author
+    }.to_json(options)
   end
 
   # Deserialize the hash back into an object
@@ -29,22 +29,16 @@ class Book
 end
 
 def save_books(books)
-  File.open('storage/books.json', 'w') do |file|
-    file.write(JSON.dump(books.map(&:to_json)))
-  end
+  File.write('storage/books.json', JSON.dump(books.map(&:to_json)))
 end
 
 def load_books
-  begin
-    loaded_books_data = JSON.parse(File.read('storage/books.json'))
-    loaded_books = []
+  loaded_books_data = JSON.parse(File.read('storage/books.json'))
+  loaded_books = []
 
-    loaded_books_data.each do |book_data|
-      loaded_books << Book.from_json(book_data)
-    end
-    loaded_books
-  rescue JSON::ParserError => e
-    puts "Error parsing JSON data for books: #{e.message}"
-    []
+  loaded_books_data.each do |book_data|
+    loaded_books << Book.from_json(book_data)
   end
+
+  loaded_books
 end

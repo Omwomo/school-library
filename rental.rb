@@ -11,16 +11,16 @@ class Rental
     person.rentals << self
   end
 
-  def to_json
+  def to_json(options = nil)
     {
       'date' => @date,
       'person' => @person.name,
       'book' => @book.title
-    }
+    }.to_json(options)
   end
 
   def self.from_json(json_data)
-    self.new(
+    new(
       json_data['date'],
       Book.new(json_data['book'], ''),
       Person.new(0, '', parent_permission: true, id: json_data['person'])
@@ -32,9 +32,7 @@ def save_rental(rental)
   rentals_data = load_rental
   rentals_data << rental
 
-  File.open('storage/rentals.json', 'w') do |file|
-    file.write(JSON.dump(rentals_data.map(&:to_json)))
-  end
+  File.write('storage/rentals.json', JSON.dump(rentals_data.map(&:to_json)))
 end
 
 def load_rental

@@ -5,7 +5,6 @@ require './book'
 require './rental'
 
 class LibraryApp
-
   def display_options
     puts 'Options:'
     puts '1. List all books'
