@@ -6,9 +6,9 @@ require './teacher'
 require './student'
 
 # List all books
-def list_all_books(books)
-  books.each do |book|
-    puts "Title: #{book.title}, Author: #{book.author}"
+def list_all_books
+  load_people.each do |person|
+    puts "Name: #{person.name}, Age: #{person.age}"
   end
 end
 
@@ -41,7 +41,9 @@ def create_person(people)
 
   puts "You've succesfully created a #{type} Name: #{person.name} ID: #{person.id} Age: #{person.age}"
 
+  #serialized_person = person.to_json
   people << person
+  save_people(people)
   person
 end
 

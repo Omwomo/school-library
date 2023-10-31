@@ -1,4 +1,5 @@
 require './nemeable'
+require 'json'
 
 class Person < Nameable
   attr_reader :id
@@ -44,4 +45,37 @@ class Person < Nameable
   def can_use_services
     of_age || @parent_permission
   end
+
+  # Serialize the object to a hash
+  def to_json
+    {
+      'id' => @id,
+      'name' => @name,
+      'age' => @age,
+      'specialization' => @specialization
+      #'parent permission' => @parent_permission
+    }
+  end
+
+  # Deserialize the hash back into an object
+  def self.from_json(json_hash)
+    self.new(json_hash['age'], json_hash['name'])
+  end
+end
+
+def save_people(people)
+  File.open('storage/people.json', 'w') do |file|
+    file.write(JSON.dump(people.map(&:to_json)))
+  end
+end
+
+def load_people
+  loaded_people_data = JSON.parse(File.read('storage/people.json'))
+  loaded_people = []
+
+  loaded_people_data.each do |person_data|
+    loaded_people << Person.from_json(person_data)
+  end
+
+  loaded_people
 end

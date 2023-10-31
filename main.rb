@@ -1,7 +1,9 @@
 require './app'
 require './handle_choices'
+require './person'
 
 class LibraryApp
+
   def display_options
     puts 'Options:'
     puts '1. List all books'
