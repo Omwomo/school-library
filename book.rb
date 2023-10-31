@@ -35,12 +35,16 @@ def save_books(books)
 end
 
 def load_books
-  loaded_books_data = JSON.parse(File.read('storage/books.json'))
-  loaded_books = []
+  begin
+    loaded_books_data = JSON.parse(File.read('storage/books.json'))
+    loaded_books = []
 
-  loaded_books_data.each do |book_data|
-    loaded_books << Book.from_json(book_data)
+    loaded_books_data.each do |book_data|
+      loaded_books << Book.from_json(book_data)
+    end
+    loaded_books
+  rescue JSON::ParserError => e
+    puts "Error parsing JSON data for books: #{e.message}"
+    []
   end
-
-  loaded_books
 end

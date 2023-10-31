@@ -68,12 +68,17 @@ def save_people(people)
 end
 
 def load_people
-  loaded_people_data = JSON.parse(File.read('storage/people.json'))
-  loaded_people = []
+  begin
+    loaded_people_data = JSON.parse(File.read('storage/people.json'))
+    loaded_people = []
 
-  loaded_people_data.each do |person_data|
-    loaded_people << Person.from_json(person_data)
+    loaded_people_data.each do |person_data|
+      loaded_people << Person.from_json(person_data)
+    end
+
+    loaded_people
+  rescue JSON::ParserError => e
+    puts "Error parsing JSON data for books: #{e.message}"
+    []
   end
-
-  loaded_people
 end
