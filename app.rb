@@ -20,7 +20,7 @@ def list_all_people(people)
 end
 
 # Create a person (teacher or student)
-def create_person(*)
+def create_person(people)
   print 'Enter name: '
   name = gets.chomp
   print 'Enter age: '
@@ -39,6 +39,9 @@ def create_person(*)
     return nil
   end
 
+  puts "You've succesfully created a #{type} Name: #{person.name} ID: #{person.id} Age: #{person.age}"
+
+  people << person
   person
 end
 
