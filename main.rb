@@ -2,6 +2,7 @@ require './app'
 require './handle_choices'
 require './person'
 require './book'
+require './rental'
 
 class LibraryApp
 
