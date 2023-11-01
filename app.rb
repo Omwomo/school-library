@@ -6,16 +6,16 @@ require './teacher'
 require './student'
 
 # List all books
-def list_all_books(books)
-  books.each do |book|
+def list_all_books
+  load_books.each do |book|
     puts "Title: #{book.title}, Author: #{book.author}"
   end
 end
 
 # List all people
-def list_all_people(people)
-  people.each do |person|
-    puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"
+def list_all_people
+  load_people.each do |person|
+    puts "Name: #{person.name}, Age: #{person.age}"
   end
 end
 
@@ -42,6 +42,7 @@ def create_person(people)
   puts "You've succesfully created a #{type} Name: #{person.name} ID: #{person.id} Age: #{person.age}"
 
   people << person
+  save_people(people)
   person
 end
 
@@ -54,6 +55,7 @@ def create_book(books)
 
   book = Book.new(title, author)
   books << book
+  save_books(books)
   book
 end
 
@@ -70,7 +72,8 @@ def create_rental(books, people)
   person = people.find { |p| p.id == person_id }
 
   if book && person
-    Rental.new(date, book, person)
+    new_rental = Rental.new(date, book, person)
+    save_rental(new_rental)
   else
     puts "Book with title '#{title}' or person with id '#{person_id}' not found."
   end

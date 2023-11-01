@@ -1,5 +1,8 @@
 require './app'
 require './handle_choices'
+require './person'
+require './book'
+require './rental'
 
 class LibraryApp
   def display_options
@@ -14,8 +17,8 @@ class LibraryApp
   end
 
   def main
-    people = []
-    books = []
+    people = load_people
+    books = load_books
 
     loop do
       display_options
