@@ -47,7 +47,7 @@ class Person < Nameable
   end
 
   # Serialize the object to a hash
-  def to_json
+  def people_to_json
     {
       id: @id,
       name: @name,
@@ -63,7 +63,7 @@ class Person < Nameable
 end
 
 def save_people(people)
-  File.write('storage/people.json', JSON.generate(people.map(&:to_json)))
+  File.write('storage/people.json', JSON.generate(people.map(&:people_to_json)))
 end
 
 def load_people

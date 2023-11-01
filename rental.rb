@@ -11,7 +11,7 @@ class Rental
     person.rentals << self
   end
 
-  def to_json
+  def rental_to_json
     {
       date: @date,
       person: @person.name,
@@ -32,12 +32,10 @@ def save_rental(rental)
   rentals_data = load_rental
   rentals_data << rental
 
-  File.write('storage/rentals.json', JSON.generate(rentals_data.map(&:to_json)))
+  File.write('storage/rentals.json', JSON.generate(rentals_data.map(&:rental_to_json)))
 end
 
 def load_rental
-  if File.exist?('storage/rentals.json')
-    loaded_rentals_data = JSON.parse(File.read('storage/rentals.json'))
-    loaded_rentals_data.map { |rental_data| Rental.from_json(rental_data) }
-  end
+  loaded_rentals_data = JSON.parse(File.read('storage/rentals.json'))
+  loaded_rentals_data.map { |rental_data| Rental.from_json(rental_data) }
 end
