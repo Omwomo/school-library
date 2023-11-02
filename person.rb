@@ -49,7 +49,7 @@ class Person < Nameable
 
   # Deserialize the hash back into an object
   def self.from_json(json_hash)
-    new(json_hash['age'], json_hash['name'])
+    new(json_hash['age'], json_hash['name'], id: json_hash['id'])
   end
 
   def add_rentals(rental)

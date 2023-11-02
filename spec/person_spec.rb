@@ -46,4 +46,15 @@ describe Person do
       expect(person_with_permission.can_use_services).to be(true)
     end
   end
+
+  describe '#people_to_json' do
+    it 'should return a hash representation of the person' do
+      json_data = person.people_to_json
+      expect(json_data).to be_a(Hash)
+      expect(json_data).to have_key(:id)
+      expect(json_data).to have_key(:name)
+      expect(json_data).to have_key(:age)
+      expect(json_data).to have_key(:specialization)
+    end
+  end
 end
