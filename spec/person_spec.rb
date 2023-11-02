@@ -74,4 +74,14 @@ describe Person do
       expect(new_person.age).to eq(25)
     end
   end
+
+  describe '#add_rentals' do
+    it 'should add a rental to the person' do
+      person = Person.new(20, 'John Doe')
+      book = Book.new('Title', 'Author')
+      rental = Rental.new('1999-10-10', book, person)
+
+      expect(person.rentals).to contain_exactly(rental)
+    end
+  end
 end
