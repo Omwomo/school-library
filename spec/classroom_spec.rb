@@ -20,4 +20,16 @@ describe Classroom do
       classroom.add_students(student)
     end
   end
+
+  describe '#add_students' do
+    it 'should add student to the list of students in the classroom' do
+      student = double('Student')
+
+      allow(student).to receive(:classroom=)
+
+      classroom.add_students(student)
+
+      expect(classroom.students).to contain_exactly(student)
+    end
+  end
 end
