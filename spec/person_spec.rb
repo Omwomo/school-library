@@ -117,4 +117,18 @@ describe Person do
       expect(File).to have_received(:write).with('storage/people.json', anything)
     end
   end
+
+  describe 'load_people' do
+    it 'should load people from a file' do
+      allow(File).to receive(:exist?).and_return(true)
+      allow(File).to receive(:read).and_return('[{"id":1,"name":"John Doe","age":20,"specialization":null}]')
+
+      loaded_people = load_people
+
+      expect(loaded_people.size).to eq(1)
+      expect(loaded_people[0].id).to eq(1)
+      expect(loaded_people[0].name).to eq('John Doe')
+      expect(loaded_people[0].age).to eq(20)
+    end
+  end
 end
