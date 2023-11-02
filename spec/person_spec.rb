@@ -84,4 +84,26 @@ describe Person do
       expect(person.rentals).to contain_exactly(rental)
     end
   end
+
+  describe '.find_by_id' do
+    it 'should find a person by their id' do
+      person1 = Person.new(20, 'John Doe', id: 1)
+      person2 = Person.new(25, 'Jane Doe', id: 2)
+      people = [person1, person2]
+
+      found_person = Person.find_by_id(2, people)
+
+      expect(found_person).to eq(person2)
+    end
+
+    it 'should return nil if person with given id is not found' do
+      person1 = Person.new(20, 'John Doe', id: 1)
+      person2 = Person.new(25, 'Jane Doe', id: 2)
+      people = [person1, person2]
+
+      found_person = Person.find_by_id(3, people)
+
+      expect(found_person).to be_nil
+    end
+  end
 end
