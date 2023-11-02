@@ -47,12 +47,13 @@ class Person < Nameable
   end
 
   # Serialize the object to a hash
-  def to_json(options = nil)
+  def people_to_json
     {
-      'id' => @id,
-      'name' => @name,
-      'age' => @age
-    }.to_json(options)
+      id: @id,
+      name: @name,
+      age: @age,
+      specialization: @specialization
+    }
   end
 
   # Deserialize the hash back into an object
@@ -62,15 +63,17 @@ class Person < Nameable
 end
 
 def save_people(people)
-  File.write('storage/people.json', JSON.dump(people.map(&:to_json)))
+  File.write('storage/people.json', JSON.generate(people.map(&:people_to_json)))
 end
 
 def load_people
-  loaded_people_data = JSON.parse(File.read('storage/people.json'))
   loaded_people = []
+  if File.exist?('storage/people.json')
+    loaded_people_data = JSON.parse(File.read('storage/people.json'))
 
-  loaded_people_data.each do |person_data|
-    loaded_people << Person.from_json(person_data)
+    loaded_people_data.each do |person_data|
+      loaded_people << Person.from_json(person_data)
+    end
   end
 
   loaded_people
