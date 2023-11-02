@@ -57,4 +57,21 @@ describe Person do
       expect(json_data).to have_key(:specialization)
     end
   end
+
+  describe '.from_json' do
+    it 'should create a new Person from a JSON hash' do
+      json_hash = {
+        'id' => 123,
+        'name' => 'Jane Doe',
+        'age' => 25,
+      }
+
+      new_person = Person.from_json(json_hash)
+
+      expect(new_person).to be_a(Person)
+      expect(new_person.id).to eq(123)
+      expect(new_person.name).to eq('Jane Doe')
+      expect(new_person.age).to eq(25)
+    end
+  end
 end
