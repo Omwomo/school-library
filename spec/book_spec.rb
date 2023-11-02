@@ -46,5 +46,25 @@ describe Book do
       @json_book = @aux.book_to_json
       Book.from_json(@json_book).should be_an_instance_of Book
     end
+
+    it 'Save books' do
+      books = [Book.new('House of Terror', 'Steve Ford'), Book.new('Animals', 'Steve Chevrolet')]
+
+      allow(File).to receive(:write)
+      save_books(books)
+
+      expect(File).to have_received(:write).with('storage/books.json', anything)
+    end
+
+    it 'load books from a file' do
+      allow(File).to receive(:exist?).and_return(true)
+      allow(File).to receive(:read).and_return('[{"title":"Sheep","author": "Bianca"}]')
+
+      loaded_books = load_books
+
+      expect(loaded_books.size).to eq(1)
+      expect(loaded_books[0].title).to eq('Sheep')
+      expect(loaded_books[0].author).to eq('Bianca')
+    end
   end
 end
