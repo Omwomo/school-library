@@ -63,7 +63,7 @@ describe Person do
       json_hash = {
         'id' => 123,
         'name' => 'Jane Doe',
-        'age' => 25,
+        'age' => 25
       }
 
       new_person = Person.from_json(json_hash)
