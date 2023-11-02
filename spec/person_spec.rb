@@ -46,4 +46,89 @@ describe Person do
       expect(person_with_permission.can_use_services).to be(true)
     end
   end
+
+  describe '#people_to_json' do
+    it 'should return a hash representation of the person' do
+      json_data = person.people_to_json
+      expect(json_data).to be_a(Hash)
+      expect(json_data).to have_key(:id)
+      expect(json_data).to have_key(:name)
+      expect(json_data).to have_key(:age)
+      expect(json_data).to have_key(:specialization)
+    end
+  end
+
+  describe '.from_json' do
+    it 'should create a new Person from a JSON hash' do
+      json_hash = {
+        'id' => 123,
+        'name' => 'Jane Doe',
+        'age' => 25
+      }
+
+      new_person = Person.from_json(json_hash)
+
+      expect(new_person).to be_a(Person)
+      expect(new_person.id).to eq(123)
+      expect(new_person.name).to eq('Jane Doe')
+      expect(new_person.age).to eq(25)
+    end
+  end
+
+  describe '#add_rentals' do
+    it 'should add a rental to the person' do
+      person = Person.new(20, 'John Doe')
+      book = Book.new('Title', 'Author')
+      rental = Rental.new('1999-10-10', book, person)
+
+      expect(person.rentals).to contain_exactly(rental)
+    end
+  end
+
+  describe '.find_by_id' do
+    it 'should find a person by their id' do
+      person1 = Person.new(20, 'John Doe', id: 1)
+      person2 = Person.new(25, 'Jane Doe', id: 2)
+      people = [person1, person2]
+
+      found_person = Person.find_by_id(2, people)
+
+      expect(found_person).to eq(person2)
+    end
+
+    it 'should return nil if person with given id is not found' do
+      person1 = Person.new(20, 'John Doe', id: 1)
+      person2 = Person.new(25, 'Jane Doe', id: 2)
+      people = [person1, person2]
+
+      found_person = Person.find_by_id(3, people)
+
+      expect(found_person).to be_nil
+    end
+  end
+
+  describe 'save_people' do
+    it 'should save people to a file' do
+      people = [Person.new(20, 'John Doe', id: 1), Person.new(25, 'Jane Doe', id: 2)]
+
+      allow(File).to receive(:write)
+      save_people(people)
+
+      expect(File).to have_received(:write).with('storage/people.json', anything)
+    end
+  end
+
+  describe 'load_people' do
+    it 'should load people from a file' do
+      allow(File).to receive(:exist?).and_return(true)
+      allow(File).to receive(:read).and_return('[{"id":1,"name":"John Doe","age":20,"specialization":null}]')
+
+      loaded_people = load_people
+
+      expect(loaded_people.size).to eq(1)
+      expect(loaded_people[0].id).to eq(1)
+      expect(loaded_people[0].name).to eq('John Doe')
+      expect(loaded_people[0].age).to eq(20)
+    end
+  end
 end
