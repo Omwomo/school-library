@@ -13,7 +13,7 @@ module StudentRegistry
 end
 
 class Student < Person
-  attr_accessor :name
+  attr_accessor :name, :classroom
 
   def initialize(age, name: 'Unknown', parent_permission: true, classroom: nil)
     super(age, name, parent_permission: parent_permission)

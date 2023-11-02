@@ -16,15 +16,6 @@ class Person < Nameable
     @all_people << self
   end
 
-  def self.find_by_id(id, people)
-    people.find { |person| person.id == id }
-  end
-
-  def add_rentals(rental)
-    @rentals << rental
-    rental.person = self
-  end
-
   def person=(person)
     @person = person
     person.rentals.push(self) unless person.rentals.include?(self)
@@ -59,6 +50,15 @@ class Person < Nameable
   # Deserialize the hash back into an object
   def self.from_json(json_hash)
     new(json_hash['age'], json_hash['name'])
+  end
+
+  def add_rentals(rental)
+    @rentals << rental
+    rental.person = self
+  end
+
+  def self.find_by_id(id, people)
+    people.find { |person| person.id == id }
   end
 end
 
