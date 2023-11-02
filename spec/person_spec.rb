@@ -106,4 +106,15 @@ describe Person do
       expect(found_person).to be_nil
     end
   end
+
+  describe 'save_people' do
+    it 'should save people to a file' do
+      people = [Person.new(20, 'John Doe', id: 1), Person.new(25, 'Jane Doe', id: 2)]
+
+      allow(File).to receive(:write)
+      save_people(people)
+
+      expect(File).to have_received(:write).with('storage/people.json', anything)
+    end
+  end
 end
