@@ -29,4 +29,10 @@ describe Teacher do
       expect(@teacher.specialization).to eql 'doctor'
     end
   end
+
+  describe '#can_use_services' do
+    it 'returns true' do
+      expect(@teacher.can_use_services).to be true
+    end
+  end
 end

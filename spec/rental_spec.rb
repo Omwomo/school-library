@@ -31,4 +31,19 @@ describe Rental do
       expect(@rental.rental_to_json).to eql(expected_hash)
     end
   end
+
+  def self.from_json(json_data)
+    new(
+      json_data['date'],
+      Book.new(json_data['book'], ''),
+      Person.new(0, '', parent_permission: true, id: json_data['person'])
+    )
+
+    rental = Rental.from_json(json_data)
+
+    expect(rental.date).to eq(Date.parse('2023-11-03'))
+    expect(rental.book.title).to eq('The Lord of the Rings: The Fellowship of the Ring')
+    expect(rental.book.author).to eq('J.R.R. Tolkien')
+    expect(rental.person.id).to eq(123)
+  end
 end
