@@ -28,7 +28,10 @@ class Rental
   end
 end
 
-public def save_rental(rental)
+
+public
+
+def save_rental(rental)
   rentals_data = load_rental
   rentals_data << rental
 
@@ -41,7 +44,7 @@ public def save_rental(rental)
   end
 end
 
-public def load_rental
+def load_rental
   rentals_data = JSON.parse(File.read('storage/rentals.json'))
   rentals_data.map { |rental_data| Rental.from_json(rental_data) }
 end

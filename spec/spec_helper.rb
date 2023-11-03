@@ -7,6 +7,5 @@ require_relative '../classroom'
 require_relative '../decorator'
 require_relative '../trimmer'
 require_relative '../capitalize'
-require_relative '../rental'
 
 require 'yaml'

@@ -52,7 +52,8 @@ describe Rental do
 
       allow(File).to receive(:exist?).and_return(true)
       allow(File).to receive(:read).and_return('[]')
-      expect(File).to receive(:write).with('storage/rentals.json', '[{"date":"2023-11-03","person":"Jo","book":"Book"}]')
+      expect(File).to receive(:write).with('storage/rentals.json',
+                                           '[{"date":"2023-11-03","person":"Jo","book":"Book"}]')
 
       save_rental(rental)
     end

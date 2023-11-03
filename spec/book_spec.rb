@@ -41,10 +41,14 @@ describe Book do
       @new_book.book_to_json.should eql @json
     end
 
-    it 'book from json' do
-      @aux = @book
-      @json_book = @aux.book_to_json
-      Book.from_json(@json_book).should be_an_instance_of Book
+    it 'self .from_json' do
+      @json_book = {
+        'title' => 'House of Terror',
+        'author' => 'Steve Ford'
+      }
+      new_book = Book.from_json(@json_book)
+      new_book.title.should eql @book.title
+      new_book.author.should eql @book.author
     end
 
     it 'Save books' do
