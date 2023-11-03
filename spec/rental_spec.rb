@@ -1,11 +1,10 @@
 require 'spec_helper'
 require 'date'
-require_relative '../rental'
 
 describe Rental do
   before :each do
     @book = Book.new('The Great Gatsby', 'F. Scott Fitzgerald')
-    @person = Person.new(30, 'John Doe', parent_permission: true)
+    @person = Person.new(30, 'John', parent_permission: true)
     @rental_date = Date.new(2023, 11, 1)
     @rental = Rental.new(@rental_date, @book, @person)
   end
@@ -25,7 +24,7 @@ describe Rental do
     it 'returns a hash representing the rental' do
       expected_hash = {
         date: @rental_date,
-        person: 'John Doe',
+        person: 'John',
         book: 'The Great Gatsby'
       }
       expect(@rental.rental_to_json).to eql(expected_hash)
@@ -49,11 +48,11 @@ describe Rental do
 
   describe '#save_rental' do
     it 'saves the rental to the storage/rentals.json file' do
-      rental = instance_double('Rental', rental_to_json: { date: '2023-11-03', person: 'John Doe', book: 'Book Title' })
+      rental = instance_double('Rental', rental_to_json: { date: '2023-11-03', person: 'John', book: 'Book' })
 
       allow(File).to receive(:exist?).and_return(true)
       allow(File).to receive(:read).and_return('[]')
-      expect(File).to receive(:write).with('storage/rentals.json', '[{"date":"2023-11-03","person":"John Doe","book":"Book Title"}]')
+      expect(File).to receive(:write).with('storage/rentals.json', '[{"date":"2023-11-03","person":"John","book":"Book"}]')
 
       save_rental(rental)
     end
@@ -61,15 +60,14 @@ describe Rental do
 
   describe '#load_rental' do
     it 'loads all rentals from the storage/rentals.json file' do
-      # Stubbing the File class to prevent actual file operations
       allow(File).to receive(:read).and_return('[]')
 
-      expect(File).to receive(:read).with('storage/rentals.json').and_return('[]') # Expectation added
+      expect(File).to receive(:read).with('storage/rentals.json').and_return('[]')
 
       loaded_rentals = Rental.load_rental
 
-      expect(loaded_rentals).to be_an(Array) # Additional expectation, checking if loaded_rentals is an array
-      expect(loaded_rentals).to be_empty # Additional expectation, checking if loaded_rentals is empty
+      expect(loaded_rentals).to be_an(Array)
+      expect(loaded_rentals).to be_empty
     end
   end
 end
