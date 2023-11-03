@@ -28,7 +28,7 @@ class Rental
   end
 end
 
-def save_rental(rental)
+public def save_rental(rental)
   rentals_data = load_rental
   rentals_data << rental
 
