@@ -41,7 +41,7 @@ describe Book do
       @new_book.book_to_json.should eql @json
     end
 
-    it 'self .from_json' do
+    it 'Book self .from_json' do
       @json_book = {
         'title' => 'House of Terror',
         'author' => 'Steve Ford'
