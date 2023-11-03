@@ -28,7 +28,6 @@ class Rental
   end
 end
 
-
 public
 
 def save_rental(rental)
