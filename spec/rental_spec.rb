@@ -47,3 +47,35 @@ describe Rental do
     expect(rental.person.id).to eq(123)
   end
 end
+
+describe '#save_rental' do
+  it ' saves the rental to the storage/rentals.json file' do
+    rental = Rental.new(Date.parse('2023-11-03'),
+                        Book.new('The Lord of the Rings: The Fellowship of the Ring', 'J.R.R. Tolkien'),
+                        Person.new(0, '', parent_permission: true, id: 123))
+
+    Rental.save_rental(rental)
+
+    rentals_data = JSON.parse(File.read('storage/rentals.json'))
+
+    expect(rentals_data).to include(rental.rental_to_json)
+  end
+end
+
+describe '#load_rental' do
+  it ' loads all rentals from the storage/rentals.json file' do
+    rental1 = Rental.new(Date.parse('2023-11-03'),
+                         Book.new('The Lord of the Rings: The Fellowship of the Ring', 'J.R.R. Tolkien'),
+                         Person.new(0, '', parent_permission: true, id: 123))
+    rental2 = Rental.new(Date.parse('2023-11-04'), Book.new('The Hobbit', 'J.R.R. Tolkien'),
+                         Person.new(0, '', parent_permission: true, id: 456))
+
+    Rental.save_rental(rental1)
+    Rental.save_rental(rental2)
+
+    loaded_rentals = Rental.load_rental
+
+    expect(loaded_rentals).to include(rental1)
+    expect(loaded_rentals).to include(rental2)
+  end
+end

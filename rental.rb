@@ -27,3 +27,16 @@ class Rental
     )
   end
 end
+
+public def save_rental(rental)
+  rentals_data = load_rental
+  rentals_data << rental
+
+  File.write('storage/rentals.json', JSON.generate(rentals_data.map(&:rental_to_json)))
+  File.write('storage/rentals.json', JSON.generate(rentals_data.map(&:rental_to_json)))
+end
+
+public def load_rental
+  rentals_data = JSON.parse(File.read('storage/rentals.json'))
+  rentals_data.map { |rental_data| Rental.from_json(rental_data) }
+end
