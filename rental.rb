@@ -32,8 +32,13 @@ public def save_rental(rental)
   rentals_data = load_rental
   rentals_data << rental
 
-  File.write('storage/rentals.json', JSON.generate(rentals_data.map(&:rental_to_json)))
-  File.write('storage/rentals.json', JSON.generate(rentals_data.map(&:rental_to_json)))
+  file_path = 'storage/rentals.json'
+
+  if File.exist?(file_path)
+    File.write(file_path, JSON.generate(rentals_data.map(&:rental_to_json)))
+  else
+    File.write(file_path, JSON.generate([rental.rental_to_json]))
+  end
 end
 
 public def load_rental
