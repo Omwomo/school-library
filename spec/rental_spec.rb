@@ -58,4 +58,18 @@ describe Rental do
       save_rental(rental)
     end
   end
+
+  describe '#load_rental' do
+    it 'loads all rentals from the storage/rentals.json file' do
+      # Stubbing the File class to prevent actual file operations
+      allow(File).to receive(:read).and_return('[]')
+
+      expect(File).to receive(:read).with('storage/rentals.json').and_return('[]') # Expectation added
+
+      loaded_rentals = Rental.load_rental
+
+      expect(loaded_rentals).to be_an(Array) # Additional expectation, checking if loaded_rentals is an array
+      expect(loaded_rentals).to be_empty # Additional expectation, checking if loaded_rentals is empty
+    end
+  end
 end
